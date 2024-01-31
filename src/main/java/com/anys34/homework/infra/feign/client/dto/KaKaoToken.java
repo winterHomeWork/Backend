@@ -1,9 +1,11 @@
 package com.anys34.homework.infra.feign.client.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class KaKaoToken {
     private String tokenType;
@@ -12,7 +14,7 @@ public class KaKaoToken {
     private Long expiresIn;
     private Long refreshTokenExpiresIn;
 
-    private KaKaoToken(final String accessToken, final String refreshToken) {
+    private KaKaoToken(String accessToken, final String refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
