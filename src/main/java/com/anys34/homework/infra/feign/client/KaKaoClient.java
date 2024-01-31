@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URI;
 
-@FeignClient(name = "KaKaoClient", configuration = FeignConfig.class)
+@FeignClient(name = "KaKaoClient", url = "https://kauth.kakao.com/oauth")
 public interface KaKaoClient {
 
     @PostMapping
