@@ -39,8 +39,7 @@ public class KakaoService {
     @Transactional
     public TokenResponse save(String code) {
         KaKaoToken token = getToken(code);
-        try {
-            KakaoInfo kaKaoInfo = kaKaoClient.getInfo(new URI(kakaoUserApiUrl), token.getTokenType() + " " + token.getAccessToken());
+            KakaoInfo kaKaoInfo = kaKaoClient.getInfo(token.getTokenType() + " " + token.getAccessToken());
 
             if (userRepository.existsByEmail(kaKaoInfo.getEmail())) {
                 throw new RuntimeException("asdf");
@@ -53,19 +52,11 @@ public class KakaoService {
             userRepository.save(user);
 
             return jwtTokenProvider.getToken(user.getEmail());
-        } catch (Exception e) {
-            return null;
-        }
     }
 
 
-    private KaKaoToken getToken(final String code) {
-        try {
-            kaKaoClient.getToken(new URI(kakaoAuthUrl), restapiKey, redirectUri, code, "authorization_code");
-        } catch (Exception e) {
-            System.out.print("asdf");
-        }
-        return null;
+    private KaKaoToken getToken(String code) {
+        return kaKaoClient.getToken(restapiKey, redirectUri, code, "authorization_code");
     }
 
     @Transactional(readOnly = true)
