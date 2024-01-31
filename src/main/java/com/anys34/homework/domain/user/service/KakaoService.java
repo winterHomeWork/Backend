@@ -24,12 +24,6 @@ public class KakaoService {
     private final KaKaoClient kaKaoClient;
     private final UserRepository userRepository;
 
-    @Value("${kakao.authUrl}")
-    private String kakaoAuthUrl;
-
-    @Value("${kakao.userApiUrl}")
-    private String kakaoUserApiUrl;
-
     @Value("${kakao.restapiKey}")
     private String restapiKey;
 

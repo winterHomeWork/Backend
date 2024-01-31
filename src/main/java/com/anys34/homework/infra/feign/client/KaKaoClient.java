@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "KaKaoClient", url = "https://kauth.kakao.com")
 public interface KaKaoClient {
 
-    @PostMapping("/v2/user/me")
+    @GetMapping("/v2/user/me")
     KakaoInfo getInfo(@RequestHeader("Authorization") String accessToken);
 
     @GetMapping("/oauth/authorize")
