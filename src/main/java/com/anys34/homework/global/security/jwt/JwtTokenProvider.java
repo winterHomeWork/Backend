@@ -21,6 +21,7 @@ public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
     private static final String ACCESS_KEY = "access_token";
+    private static final String REFRESH_KEY = "refresh_token";
 
     public TokenResponse getToken(String email) {
         String accessToken = generateToken(email, jwtProperties.getAccessExp(),ACCESS_KEY);
@@ -28,12 +29,20 @@ public class JwtTokenProvider {
         return new TokenResponse(accessToken);
     }
 
-    private String generateToken(String userName, long expiration, String type) {
+    private String generateToken(String userName, Long expiration) {
         return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
                 .setSubject(userName)
-                .setHeaderParam("typ", type)
+                .setHeaderParam("type", "user")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+                .compact();
+    }
+
+    private String refreshToken(Long ttl) {
+        return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
+                .setHeaderParam("type", "user")
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + ttl * 1000))
                 .compact();
     }
 
