@@ -1,6 +1,8 @@
 package com.anys34.homework.global.security.jwt;
 
 import com.anys34.homework.global.security.jwt.dto.TokenResponse;
+import com.anys34.homework.global.security.jwt.entity.RefreshToken;
+import com.anys34.homework.global.security.jwt.entity.RefreshTokenRepository;
 import com.anys34.homework.global.security.jwt.exception.ExpiredJwtException;
 import com.anys34.homework.global.security.principle.AuthDetailsService;
 import io.jsonwebtoken.Claims;
@@ -20,27 +22,38 @@ public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
+    private final RefreshTokenRepository refreshTokenRepository;
+
     private static final String ACCESS_KEY = "access_token";
     private static final String REFRESH_KEY = "refresh_token";
 
     public TokenResponse getToken(String email) {
-        String accessToken = generateToken(email, jwtProperties.getAccessExp(),ACCESS_KEY);
+        String accessToken = generateToken(email, ACCESS_KEY, jwtProperties.getAccessExp());
+        String refreshToken = refreshToken(REFRESH_KEY, jwtProperties.getRefreshExp());
+
+        refreshTokenRepository.save(
+                RefreshToken.builder()
+                        .id(email)
+                        .token(refreshToken)
+                        .ttl(jwtProperties.getRefreshExp())
+                        .build()
+        );
 
         return new TokenResponse(accessToken);
     }
 
-    private String generateToken(String userName, Long expiration) {
+    private String generateToken(String userName, String type, Long ttl) {
         return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
                 .setSubject(userName)
-                .setHeaderParam("type", "user")
+                .setHeaderParam("typ", type)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + ttl * 1000))
                 .compact();
     }
 
-    private String refreshToken(Long ttl) {
+    private String refreshToken(String type, Long ttl) {
         return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
-                .setHeaderParam("type", "user")
+                .setHeaderParam("typ", type)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + ttl * 1000))
                 .compact();
