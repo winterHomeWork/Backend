@@ -35,17 +35,16 @@ public class KakaoService {
         KaKaoToken token = getToken(code);
             KakaoInfo kaKaoInfo = kaKaoClient.getInfo(token.getTokenType() + " " + token.getAccessToken());
 
-            if (userRepository.existsByEmail(kaKaoInfo.getEmail())) {
-                throw new RuntimeException("asdf");
+            if (!userRepository.existsByEmail(kaKaoInfo.getEmail())) {
+                User user = User.builder()
+                        .email(kaKaoInfo.getEmail())
+                        .name(kaKaoInfo.getName())
+                        .build();
+
+                userRepository.save(user);
             }
-            User user = User.builder()
-                    .email(kaKaoInfo.getEmail())
-                    .name(kaKaoInfo.getName())
-                    .build();
 
-            userRepository.save(user);
-
-            return jwtTokenProvider.getToken(user.getEmail());
+            return jwtTokenProvider.getToken(kaKaoInfo.getEmail());
     }
 
 
