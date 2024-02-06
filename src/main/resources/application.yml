@@ -8,6 +8,7 @@ spring:
     password: ${DB_PASSWORD}
     hikari:
       maxLifetime: 580000
+      
   jpa:
     hibernate:
       ddl-auto: update
