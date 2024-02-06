@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class KakaoController {
 
     @Operation(summary = "카카오 정보 불러와서 데이터 저장")
     @GetMapping("/save")
-    public TokenResponse save(String code) {
+    public TokenResponse save(@RequestParam(name = "code") String code) {
         return kakaoService.save(code);
     }
 
