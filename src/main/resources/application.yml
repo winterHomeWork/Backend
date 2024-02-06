@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL}
@@ -34,3 +36,7 @@ auth:
 server:
   servlet:
     context-path: /nudia
+
+kakao:
+  restapiKey: ${API_KEY}
+  redirectUrl: ${KAKAO_URL}
