@@ -1,0 +1,5 @@
+config:
+  name: nudia
+  prefix: "/nudia"
+  service_type: be
+  port: 8080
