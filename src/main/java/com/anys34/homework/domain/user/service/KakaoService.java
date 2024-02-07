@@ -52,13 +52,5 @@ public class KakaoService {
         return kaKaoClient.getToken(restapiKey, redirectUri, code, "authorization_code");
     }
 
-    @Transactional(readOnly = true)
-    public KakaoLoginPageReponse login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
-        String redirectUrl = "https://kauth.kakao.com/oauth/authorize" +
-                "?response_type=code&" +
-                "client_id=" + restapiKey +
-                "&redirect_uri=" + redirectUri;
-        return new KakaoLoginPageReponse(redirectUrl);
-    }
 }
 
