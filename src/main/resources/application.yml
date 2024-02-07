@@ -33,10 +33,6 @@ auth:
     header: ${JWT_HEADER}
     prefix: ${JWT_PREFIX}
 
-kakao:
-  restapiKey: ${API_KEY}
-  redirectUrl: ${KAKAO_URL}
-
 server:
   servlet:
     context-path: /nudia
