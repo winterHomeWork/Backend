@@ -19,8 +19,8 @@ public class KakaoController {
 
     @Operation(summary = "카카오 정보 불러와서 데이터 저장")
     @GetMapping("/save")
-    public TokenResponse save(@RequestParam(name = "code") String code) {
-        return kakaoService.save(code);
+    public TokenResponse save(@RequestParam(name = "access_token") String token) {
+        return kakaoService.save(token);
     }
 
 }
