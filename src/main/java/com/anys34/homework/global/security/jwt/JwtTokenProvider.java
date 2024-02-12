@@ -39,7 +39,7 @@ public class JwtTokenProvider {
                         .build()
         );
 
-        return new TokenResponse(accessToken);
+        return new TokenResponse(accessToken, refreshToken);
     }
 
     private String generateToken(String userName, String type, Long ttl) {

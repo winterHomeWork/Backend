@@ -1,6 +1,5 @@
 package com.anys34.homework.domain.user.presentation.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
