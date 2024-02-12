@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/kakao")
 @RequiredArgsConstructor
 public class KakaoController {
+    
     private final KakaoAuthLinkService kakaoAuthLinkService;
     private final KakaoAuthService kakaoAuthService;
 
