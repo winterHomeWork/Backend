@@ -51,3 +51,8 @@ jobs:
                       DB_PASSWORD=${{ secrets.DB_PASSWORD }}
                       REDIS_HOST=${{ secrets.REDIS_HOST }}
                       REDIS_PORT=${{ secrets.REDIS_PORT }}
+                      KAKAO_BASE_URL=${{ secrets.KAKAO_BASE_URL }}
+                      API_KEY=${{ secrets.API_KEY }}
+                      KAKAO_CLIENT=${{ secrets.KAKAO_CLIENT }}
+                      KAKAO_JAVASCRIPT=${{ secrets.KAKAO_JAVASCRIPT }}
+                      KAKAO_REDIRECT=${{ secrets.KAKAO_REDIRECT }}
