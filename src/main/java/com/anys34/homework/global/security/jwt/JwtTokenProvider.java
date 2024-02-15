@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -27,35 +28,29 @@ public class JwtTokenProvider {
     private static final String ACCESS_KEY = "access_token";
     private static final String REFRESH_KEY = "refresh_token";
 
-    public TokenResponse getToken(String email) {
-        String accessToken = generateToken(email, ACCESS_KEY, jwtProperties.getAccessExp());
-        String refreshToken = refreshToken(REFRESH_KEY, jwtProperties.getRefreshExp());
+    public String createAccessToken(String email) {
+        return createToken(email, ACCESS_KEY, jwtProperties.getAccessExp());
+    }
 
+    @Transactional
+    public String createRefreshToken(String email) {
+        String token = createToken(email, REFRESH_KEY, jwtProperties.getRefreshExp());
         refreshTokenRepository.save(
                 RefreshToken.builder()
-                        .id(email)
-                        .token(refreshToken)
-                        .ttl(jwtProperties.getRefreshExp())
+                        .token(token)
+                        .email(email)
                         .build()
         );
-
-        return new TokenResponse(accessToken, refreshToken);
+        return token;
     }
 
-    private String generateToken(String userName, String type, Long ttl) {
+    private String createToken(String email, String type, Long time) {
+        Date now = new Date();
         return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
-                .setSubject(userName)
+                .setSubject(email)
                 .setHeaderParam("typ", type)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + ttl * 1000))
-                .compact();
-    }
-
-    private String refreshToken(String type, Long ttl) {
-        return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
-                .setHeaderParam("typ", type)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + ttl * 1000))
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + time))
                 .compact();
     }
 

@@ -47,6 +47,9 @@ public class KakaoAuthService {
                     .build());
         }
 
-        return jwtTokenProvider.getToken(email);
+        return TokenResponse.builder()
+                .accessToken(jwtTokenProvider.createAccessToken(email))
+                .refreshToken(jwtTokenProvider.createRefreshToken(email))
+                .build();
     }
 }

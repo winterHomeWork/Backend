@@ -1,22 +1,24 @@
 package com.anys34.homework.global.security.jwt.entity;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.TimeToLive;
-import org.springframework.data.redis.core.index.Indexed;
 
 @Getter
-@Builder
-@RedisHash
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RedisHash(value = "refreshToken", timeToLive = 2592000L)
 public class RefreshToken {
     @Id
-    private String id;
-
-    @Indexed
     private String token;
 
-    @TimeToLive
-    private Long ttl;
+    private String email;
+
+    @Builder
+    public RefreshToken(String token, String email) {
+        this.token = token;
+        this.email = email;
+    }
 }
