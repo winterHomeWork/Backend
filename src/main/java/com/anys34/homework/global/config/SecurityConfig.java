@@ -37,7 +37,7 @@ public class SecurityConfig {
 
         http.cors().and()
                 .authorizeRequests()
-                .antMatchers("/user").authenticated()
+                .antMatchers("/nudia/user").authenticated()
                 .anyRequest().permitAll();
 
         http.exceptionHandling().authenticationEntryPoint(
