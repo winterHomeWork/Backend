@@ -1,6 +1,7 @@
 package com.anys34.homework.domain.user.service;
 
 import com.anys34.homework.domain.user.presentation.dto.AccessTokenResponse;
+import com.anys34.homework.domain.user.presentation.dto.RefreshTokenRequest;
 import com.anys34.homework.global.security.jwt.JwtTokenProvider;
 import com.anys34.homework.global.security.jwt.entity.RefreshToken;
 import com.anys34.homework.global.security.jwt.entity.RefreshTokenRepository;
@@ -16,8 +17,9 @@ public class CreateAccessTokenService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional(readOnly = true)
-    public AccessTokenResponse execute(String token) {
-        RefreshToken refreshToken = getRefreshToken(token);
+    public AccessTokenResponse execute(RefreshTokenRequest token) {
+        System.out.println(token.getRefreshToken());
+        RefreshToken refreshToken = getRefreshToken(token.getRefreshToken());
         return new AccessTokenResponse(jwtTokenProvider
                 .createAccessToken(refreshToken.getEmail()));
     }
