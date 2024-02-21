@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface FoodClient {
      @GetMapping()
      HttpResponse foodClient(
-             @RequestParam(name = "ServiceKey") String key,
+             @RequestParam(name = "serviceKey") String key,
              @RequestParam(name = "returnType") String type
     );
 }
