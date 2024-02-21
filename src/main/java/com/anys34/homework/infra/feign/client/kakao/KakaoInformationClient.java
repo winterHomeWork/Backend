@@ -1,4 +1,4 @@
-package com.anys34.homework.infra.feign.client;
+package com.anys34.homework.infra.feign.client.kakao;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

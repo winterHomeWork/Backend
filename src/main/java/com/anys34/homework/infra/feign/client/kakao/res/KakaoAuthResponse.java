@@ -1,4 +1,4 @@
-package com.anys34.homework.infra.feign.client.dto.res;
+package com.anys34.homework.infra.feign.client.kakao.res;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

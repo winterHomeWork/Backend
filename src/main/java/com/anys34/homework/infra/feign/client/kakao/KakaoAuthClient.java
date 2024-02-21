@@ -1,6 +1,6 @@
-package com.anys34.homework.infra.feign.client;
+package com.anys34.homework.infra.feign.client.kakao;
 
-import com.anys34.homework.infra.feign.client.dto.res.KakaoAuthResponse;
+import com.anys34.homework.infra.feign.client.kakao.res.KakaoAuthResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

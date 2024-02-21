@@ -7,8 +7,8 @@ import com.anys34.homework.global.config.properties.AuthProperties;
 import com.anys34.homework.global.security.jwt.JwtTokenProvider;
 import com.anys34.homework.global.security.jwt.dto.TokenResponse;
 import com.anys34.homework.infra.feign.client.KakaoAuthClient;
-import com.anys34.homework.infra.feign.client.KakaoInformationClient;
-import com.anys34.homework.infra.feign.client.dto.res.KakaoAuthResponse;
+import com.anys34.homework.infra.feign.client.kakao.KakaoInformationClient;
+import com.anys34.homework.infra.feign.client.kakao.res.KakaoAuthResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
