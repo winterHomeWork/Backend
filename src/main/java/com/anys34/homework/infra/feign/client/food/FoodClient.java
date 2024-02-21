@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(url = "http://apis.data.go.kr/B553748/CertImgListServiceV3")
 public interface FoodClient {
-     @GetMapping()
+     @GetMapping
      HttpResponse foodClient(
              @RequestParam(name = "serviceKey") String key,
-             @RequestParam(name = "returnType") String type
+             @RequestParam(name = "returnType") String type,
+             @RequestParam(name = "pageNo") String pageNo,
+             @RequestParam(name = "numOfRows") String numOfRows
     );
 }
