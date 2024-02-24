@@ -1,4 +1,4 @@
-package com.anys34.homework.facade;
+package com.anys34.homework.domain.user.facade;
 
 import com.anys34.homework.domain.user.domain.User;
 import com.anys34.homework.domain.user.domain.repository.UserRepository;
