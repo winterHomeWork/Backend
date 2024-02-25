@@ -17,8 +17,8 @@ public class SaveFoodService {
     private final FoodRepository foodRepository;
 
     @Transactional
-    public void saveFood(String key, String type, String pageNo, String numOfRows) {
-        HttpResponse response = foodClient.foodClient(key, type, pageNo, numOfRows);
+    public void saveFood() {
+        HttpResponse response = foodClient.foodClient("9tm3e%2F8Kjjdl6DgM4KLaTp2ZlvHwIW%2Fh9yRiZElqj3VJTWB3owx7BTG%2BNzhiFCCTk5Df5dm0FCELYccHS9dnyg%3D%3D", "json", "1","1");
 
         for (Item item : response.getBody().getItems()) {
             Food food = Food.builder()

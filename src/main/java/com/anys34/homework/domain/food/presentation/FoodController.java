@@ -15,11 +15,7 @@ public class FoodController {
 
     @PostMapping
     public void foodSave(
-            @RequestParam String key,
-            @RequestParam String type,
-            @RequestParam String pageNo,
-            @RequestParam String numOfRows
     ) {
-        saveFoodService.saveFood(key, type, pageNo, numOfRows);
+        saveFoodService.saveFood();
     }
 }
