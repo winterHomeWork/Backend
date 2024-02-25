@@ -6,7 +6,7 @@ import com.anys34.homework.domain.user.presentation.dto.CodeRequest;
 import com.anys34.homework.global.config.properties.AuthProperties;
 import com.anys34.homework.global.security.jwt.JwtTokenProvider;
 import com.anys34.homework.global.security.jwt.dto.TokenResponse;
-import com.anys34.homework.infra.feign.client.KakaoAuthClient;
+import com.anys34.homework.infra.feign.client.kakao.KakaoAuthClient;
 import com.anys34.homework.infra.feign.client.kakao.KakaoInformationClient;
 import com.anys34.homework.infra.feign.client.kakao.res.KakaoAuthResponse;
 import lombok.RequiredArgsConstructor;
