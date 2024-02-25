@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(url = "http://apis.data.go.kr/B553748/CertImgListServiceV3")
+@FeignClient(url = "http://apis.data.go.kr/B553748/CertImgListServiceV3", name = "food")
 public interface FoodClient {
      @GetMapping
      HttpResponse foodClient(
